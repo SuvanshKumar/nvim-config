@@ -27,7 +27,9 @@ if $SHELL == "C:/Program Files/Git/usr/bin/bash"
     set shellslash
 endif
 
-set guifont=FiraCode\ NF:h11
+" set guifont=FiraCode\ NF:h11
+" Something that worked in Mac:
+set guifont=JetBrainsMono\ Nerd\ Font:h14
 
 " set shellslash
 
