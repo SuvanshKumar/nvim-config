@@ -8,10 +8,12 @@ local configs = require('nvim-treesitter.configs')
 
 configs.setup({
     -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-    ensure_installed = "maintained",
+    -- ensure_installed = "maintained",
+    -- Above was the old way
+    ensure_installed = { 'python', 'typescript', 'javascript', 'markdown', 'yaml', 'json' },
 
     -- Install languages synchronously (only applied to `ensure_installed`)
-    sync_install = false
+    sync_install = false,
 
     -- List of parsers to ignore installing
     ignore_install = { "" },

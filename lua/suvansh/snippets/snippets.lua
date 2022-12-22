@@ -32,7 +32,8 @@ ls.add_snippets('javascript', {
         t(') => {'),
         t(''),
         i(0),
-        t('};')
+        t('};'),
+    })
 }, { key = 'javascript',
 })
 

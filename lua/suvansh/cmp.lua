@@ -54,8 +54,8 @@ cmp.setup({
         ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
         -- ['<C-y>'] = cmp.config.disable, -- specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping
         ['<C-e>'] = cmp.mapping({
-            'i' = cmp.mapping.abort(),
-            'c' = cmp.mapping.close()
+            i = cmp.mapping.abort(),
+            c = cmp.mapping.close()
         }),
         ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     },
@@ -75,7 +75,7 @@ cmp.setup({
             -- vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
             vim_item.menu = ({
                 nvim_lsp = '[LSP]',
-                luasnip = '[Snippet]'
+                luasnip = '[Snippet]',
                 buffer = '[Buffer]',
                 path = '[Path]',
             })[entry.source.name]
@@ -87,11 +87,14 @@ cmp.setup({
         behavior = cmp.ConfirmBehavior.Replace,
         select = false,
     },
-    documentation = {
-        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    -- documentation = {
+        -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
         -- border = cmp.config.window.bordered(),
         -- border = rounded,    -- Will this work? -- No, the border doesn't show up
         -- border = { "+", "-", "+", "|", "+", "-", "+", "|"},
+    -- },
+    window = {
+        documentation = cmp.config.window.bordered(),
     },
     experimental = {
         ghost_text = true,      -- Experiment - set this to true
