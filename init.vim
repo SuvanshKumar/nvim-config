@@ -270,3 +270,6 @@ augroup end
 " to the beginning
 inoremap <BS> ^C
 
+" Mapping to toggle full-screen in neovide using F10
+nnoremap <F10> <cmd>let g:neovide_fullscreen = !g:neovide_fullscreen<CR>
+
