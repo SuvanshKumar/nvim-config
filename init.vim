@@ -142,13 +142,13 @@ vnoremap <leader>d "+d
 
 " Better window navigation
 nnoremap <A-h> <C-w>h
-nnoremap <A-1> <C-w>l
+nnoremap <A-l> <C-w>l
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 inoremap <A-h> <C-\><C-N><C-w>h
 inoremap <A-j> <C-\><C-N><C-w>j
 inoremap <A-k> <C-\><C-N><C-w>k
-inoremap <A-1> <C-\><C-N><C-w>l
+inoremap <A-l> <C-\><C-N><C-w>l
 
 " ---------- TERMINAL related mappings ----------
 " Open a terminal window below, resize to 18 rows, enter the insert mode
@@ -189,12 +189,12 @@ vnoremap <leader>rc :read!
 
 " Drawback it disturbs the clipboard. Need to find a way to do this without
 " disturbing the clipboard.
-vnoremap <C-CR> y: read! "R"<CR>
+vnoremap <C-CR> y: read! "<CR>
 
 " My windows specific drawback the command shell needs to be in cmd mode, not
 " bash mode so for windows, we temporarily set shell to cmd and then reset it
 " back to bash
-" vnoremap <C-CR> y:set shell-cmd.exe<CR>: read! ^R"<CR>:set shell-bash.exe<CR>
+" vnoremap <C-CR> y:set shell-cmd.exe<CR>: read! "<CR>:set shell-bash.exe<CR>
 
 " temporarily removing hjkl commands to improve navigation skills
 " nnoremap h <nop>
