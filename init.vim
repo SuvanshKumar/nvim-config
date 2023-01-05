@@ -91,7 +91,7 @@ set nowrap
 " set splitbelow    " force all horizontal splits to go below the current window
 
 " Mapping leader to space (think about this)
-nnoremap <Space> <Hop>
+nnoremap <Space> <Nop>
 let mapleader = " "
 
 " load the plugins
