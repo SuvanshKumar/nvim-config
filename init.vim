@@ -164,7 +164,7 @@ nnoremap <leader>T :bo sp \| term<CR>:resize 18<CR>i
 " nnoremap <leader>T :botright split \| terminal<CR>:resize 18<CR>i
 
 " Esc to exit a terminal insert mode
-tnoremap <Esc> <Esc><C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
 
 " Better terminal navigation
 tnoremap <A-h> <C-\><C-n><C-w>h
