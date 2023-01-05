@@ -112,6 +112,7 @@ require "suvansh.treesitter"
 -- require 'nvim-treesitter.install'.compilers = { "clang" }
 require "suvansh.gitsigns"
 require "suvansh.nvim-tree"
+require "suvansh.lualine"
 EOF
 
 " TEMPORARY trying with luasnip -------------- Start ------------------

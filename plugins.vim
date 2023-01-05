@@ -95,4 +95,7 @@ Plug 'lewis6991/gitsigns.nvim'
 " Plug RRethy/vin-hexokinase, { 'do': 'make hexokinase' }
 Plug 'norcalli/nvim-colorizer.lua'
 
+" Status Line - lualine
+Plug 'nvim-lualine/lualine.nvim'
+
 call plug#end()
