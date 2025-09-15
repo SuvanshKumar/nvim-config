@@ -1,7 +1,7 @@
 call plug#begin()
 
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-treesitter/nvim-treesitter, { do': 'TSUpdate' }
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': 'TSUpdate' }
 
 " Nvim-tree
 Plug 'kyazdani42/nvim-web-devicons'
@@ -53,6 +53,7 @@ Plug 'shaunsingh/moonlight.nvim'
                                         " termguicolors enabled
 " Plug 'rebelot/kanagawa.nvim'
 " Add a colorscheme called embark as well - nvim-telescope showcase
+Plug 'projekt0n/github-nvim-theme'
 
 " ----- Colorschemes end -----
 
@@ -70,7 +71,8 @@ Plug 'hrsh7th/cmp-nvim-lsp'     " Use lsp as a completion source for nvim-cmp
 
 " Plug 'hrsh7th/cmp-vsnip'
 " Plug 'hrsh7th/vim-vsnip'
-Plug 'L3MON4D3/LuaSnip', { 'tag': 'v<CurrentMajor>.*' }
+" Plug 'L3MON4D3/LuaSnip', { 'tag': 'v<CurrentMajor>.*' }
+Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 
 " ----- cmp end -----
@@ -97,5 +99,15 @@ Plug 'norcalli/nvim-colorizer.lua'
 
 " Status Line - lualine
 Plug 'nvim-lualine/lualine.nvim'
+
+" Nvim DAP (Debug Adapter Protocol)
+Plug 'mfussenegger/nvim-dap'
+" Nvim DAP Virtual Text
+Plug 'theHamsta/nvim-dap-virtual-text'
+" vscode-js nvim dap Adapter
+Plug 'mxsdev/nvim-dap-vscode-js'
+
+" Rest.nivm - Http client
+Plug 'rest-nvim/rest.nvim'
 
 call plug#end()

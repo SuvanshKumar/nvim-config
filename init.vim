@@ -16,16 +16,16 @@
 " 
 " set noshelltemp
 
-let $PATH .= C:\cygwin64\bin'
-set shell=bash.exe
-" C:\Program Files\Git\usr\bin needs to be on the path,
-" so that term command opens a bash
-
-if $SHELL == "C:/Program Files/Git/usr/bin/bash"
-    let &shellcmdflag = '-c'
-    set shellxquote=(
-    set shellslash
-endif
+" let $PATH .= C:\cygwin64\bin'
+" set shell=bash.exe
+" " C:\Program Files\Git\usr\bin needs to be on the path,
+" " so that term command opens a bash
+" 
+" if $SHELL == "C:/Program Files/Git/usr/bin/bash"
+"     let &shellcmdflag = '-c'
+"     set shellxquote=(
+"     set shellslash
+" endif
 
 " set guifont=FiraCode\ NF:h11
 " Something that worked in Mac:
@@ -97,7 +97,7 @@ let mapleader = " "
 " load the plugins
 
 " source ~/AppData/Local/nvim/plugins.vim
-:exe 'source '.stdpath('config').'./plugins.vim'
+:exe 'source '.stdpath('config').'/plugins.vim'
 
 lua << EOF
 require "suvansh.colorschemesetter"
@@ -113,6 +113,8 @@ require "suvansh.treesitter"
 require "suvansh.gitsigns"
 require "suvansh.nvim-tree"
 require "suvansh.lualine"
+require "suvansh.nvim-dap"
+require "suvansh.rest-nvim"
 EOF
 
 " TEMPORARY trying with luasnip -------------- Start ------------------
@@ -150,6 +152,15 @@ inoremap <A-h> <C-\><C-N><C-w>h
 inoremap <A-j> <C-\><C-N><C-w>j
 inoremap <A-k> <C-\><C-N><C-w>k
 inoremap <A-l> <C-\><C-N><C-w>l
+" Same for Mac, replacing 'Alt' key with 'Option' key
+nnoremap ˙ <C-w>h
+nnoremap ¬ <C-w>l
+nnoremap ∆ <C-w>j
+nnoremap ˚ <C-w>k
+inoremap ˙ <C-\><C-N><C-w>h
+inoremap ∆ <C-\><C-N><C-w>j
+inoremap ˚ <C-\><C-N><C-w>k
+inoremap ¬ <C-\><C-N><C-w>l
 
 " ---------- TERMINAL related mappings ----------
 " Open a terminal window below, resize to 18 rows, enter the insert mode
@@ -165,6 +176,7 @@ nnoremap <leader>T :bo sp \| term<CR>:resize 18<CR>i
 " nnoremap <leader>T :botright split \| terminal<CR>:resize 18<CR>i
 
 " Esc to exit a terminal insert mode
+" tnoremap <Esc> <Esc><C-\><C-n>
 tnoremap <Esc> <C-\><C-n>
 
 " Better terminal navigation
@@ -172,6 +184,11 @@ tnoremap <A-h> <C-\><C-n><C-w>h
 tnoremap <A-l> <C-\><C-n><C-w>l
 tnoremap <A-j> <C-\><C-n><C-w>j
 tnoremap <A-k> <C-\><C-n><C-w>k
+" Same for Mac, replacing 'Alt' key with 'Option' key
+tnoremap ˙ <C-\><C-n><C-w>h
+tnoremap ¬ <C-\><C-n><C-w>l
+tnoremap ∆ <C-\><C-n><C-w>j
+tnoremap ˚ <C-\><C-n><C-w>k
 " ---------- TERMINAL related mappings end ----------
 
 " colorscheme codedark
@@ -190,7 +207,17 @@ vnoremap <leader>rc :read!
 
 " Drawback it disturbs the clipboard. Need to find a way to do this without
 " disturbing the clipboard.
-vnoremap <C-CR> y: read! "<CR>
+vnoremap <C-S-CR> y: read! "<CR>
+
+" To solve the above drawback, simply run the command by passing it to sh
+" But this command has the drawback that the whole line(s) is run in the
+" command. You cannot run a partial line by selecting visually and using this
+" way
+vnoremap <C-CR> !sh<CR>
+" To do the same in normal mode (works for commands written in a single line,
+" for multiple (eg. if a command spans across 2 lines), use 2<C-CR> (below
+" mapping prepended by the number), etc.)
+nnoremap <C-CR> !!sh<CR>
 
 " My windows specific drawback the command shell needs to be in cmd mode, not
 " bash mode so for windows, we temporarily set shell to cmd and then reset it
@@ -209,7 +236,7 @@ nnoremap <leader>dls :ls<CR>:bd<space>
 " ---------- Telescope related mappings ----------
 nnoremap <leader>ff :Telescope find_files<CR>
 nnoremap <leader>fw :Telescope live_grep<CR>
-nnoremap <leader>t1f :lua require'telescope.builtin.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>
+nnoremap <leader>t1f :lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>
 " nnoremap <leader>tb Telescope buffers<CR>
 nnoremap <leader>ls :Telescope buffers<CR>
 nnoremap <leader>tgs :Telescope git_status<CR>
@@ -224,12 +251,40 @@ nnoremap  :Telescope grep_string<CR>
 " ---------- Telescope related mappings end ----------
 
 " ---------- Gitsigns related mappings ----------
-nnoremap <leader>gb :Gitsigns blame Line<CR>
+nnoremap <leader>gb :Gitsigns blame_line<CR>
 " ---------- Gitsigns related mappings end ----------
 
 " ---------- Nvim-tree related mappings ----------
 nnoremap <leader>e :NvimTreeToggle<CR>
 " ---------- Nvim-tree related mappings end ----------
+
+" ---------- Nvim-dap related mappings ----------
+nnoremap <leader>dc :lua require('dap').continue()<CR>
+" or :DapContinue<CR>
+nnoremap <leader>db :DapToggleBreakpoint<CR>
+nnoremap <leader>ds :DapStepOver<CR>
+nnoremap <leader>di :DapStepInto<CR>
+nnoremap <leader>do :DapStepOut<CR>
+" Move up the call stack
+nnoremap <leader>dk :lua require('dap').up()<CR>
+" Move down the call stack
+nnoremap <leader>dj :lua require('dap').down()<CR>
+nnoremap <leader>dB <Cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+nnoremap <leader>dlp <Cmd>lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+nnoremap <leader>dr <Cmd>lua require('dap').repl.open()<CR>
+nnoremap <leader>dl <Cmd>lua require('dap').run_last()<CR>
+nnoremap <leader>dh :lua require('dap.ui.widgets').hover()<CR>
+nnoremap <leader>d? :lua local widgets=require('dap.ui.widgets');widgets.centered_float(widgets.scopes)<CR>
+" Set all exception breakpoints (more refinement is also possible)
+nnoremap <leader>de :lua require('dap').set_exception_breakpoints({ 'all' })<CR>
+" Unset all the exception breakpoints
+nnoremap <leader>dne :lua require('dap').set_exception_breakpoints({})<CR>
+nnoremap <leader>dR :lua require('dap').clear_breakpoints()<CR>
+" ---------- Nvim-dap related mappings end ----------
+
+" json formatting mappings with jq (jq is a cli based utility for jsons)
+vnoremap <leader>jq !jq --indent 4<CR>
+nnoremap <leader>jq :%!jq --indent 4<CR>
 
 " json formatting with <leader>j
 augroup jsonbindings
@@ -274,3 +329,21 @@ inoremap <BS> ^C
 " Mapping to toggle full-screen in neovide using F10
 nnoremap <F10> <cmd>let g:neovide_fullscreen = !g:neovide_fullscreen<CR>
 
+" Rest Nvim (Http request directly from within neovim, written in lua
+" rest.nvim mappings
+" Run the request under (or next to) the cursor
+nmap <leader>rr <Plug>RestNvim
+" Re-run the last request
+nmap <leader>rl <Plug>RestNvimLast
+" Preview the request cURL command
+nmap <leader>rp <Plug>RestNvimPreview
+
+" Temp mappings for http files to expand and minify GraphQL queries
+" These are temporary, so remove them later and make them better (perhaps with
+" autocommands for just http files)
+nnoremap <leader>gqe <Cmd>s/\\n/\r/g<CR>
+vnoremap <leader>gqm :s/\n/\\n/
+
+" trying with floating window terminal
+" :lua vim.api.nvim_open_win(4, true, {relative='editor', row=10, col=25, width=200, height=40})
+" Replace 4 with the buffer number of the terminal

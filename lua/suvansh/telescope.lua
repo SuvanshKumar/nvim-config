@@ -8,6 +8,7 @@ local actions = require('telescope.actions')
 
 telescope.setup {
     defaults = {
+	file_ignore_patterns = { "node_modules" },
         -- Nice ricing from LunarVim
         prompt_prefix = " ",
         selection_caret = " ",

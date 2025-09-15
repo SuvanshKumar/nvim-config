@@ -72,8 +72,8 @@ ls.add_snippets('typescript', {
     s({ trig = 'funarr', name = 'Arrow Function' }, fmt(
         [[
 /**
-* {} {}
-*/
+ * {} {}
+ */
 const {} = ({}){}{} => {{
     {}
 }}
@@ -92,11 +92,11 @@ const {} = ({}){}{} => {{
                     -- argType = trimString(argType)
                     -- local argDocString = ' * {' .. argType .. '} ' .. argName
                     local typeParameter = (colonSplittedArgs[2] and colonSplittedArgs[2] ~= '') and ('{' .. trimString(colonSplittedArgs[2]) .. '} ') or ''
-                    local argDocString = '* @param ' .. typeParameter .. trimString(colonSplittedArgs[1])
+                    local argDocString = ' * @param ' .. typeParameter .. trimString(colonSplittedArgs[1])
                     table.insert(argDocs, argDocString)
                 end
                 if returnType and returnType ~= '' then
-                    table.insert(argDocs, '* @returns {' .. returnType .. '}')
+                    table.insert(argDocs, ' * @returns {' .. returnType .. '}')
                 end
                 return argDocs
             end, { 2, 3 }, {}),
